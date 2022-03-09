@@ -1,6 +1,7 @@
 package service;
 
 import domain.Student;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import repository.TemaXMLRepo;
 import validation.NotaValidator;
 import validation.StudentValidator;
 import validation.TemaValidator;
+import validation.ValidationException;
 
 class ServiceTest {
     private Service service;
@@ -27,6 +29,11 @@ class ServiceTest {
 
     @Test
     void addStudent_correctGroup_success() {
-        service.addStudent(new Student("uniqueId", "nume", 109, "mail@mail.mail"));
+        Assertions.assertNotNull(service.addStudent(new Student("uniqueId", "nume", 20, "mail@mail.mail")));
+    }
+
+    @Test
+    void addStudent_negativeGroup_ValidationException() {
+        Assertions.assertThrows(ValidationException.class, () -> service.addStudent(new Student("uniqueId", "nume", 20, "mail@mail.mail")));
     }
 }
