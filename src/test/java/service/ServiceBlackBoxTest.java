@@ -1,6 +1,5 @@
 package service;
 
-import domain.Student;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,20 +12,12 @@ import validation.TemaValidator;
 import validation.ValidationException;
 
 import java.io.IOException;
-import java.nio.file.Files;
 
-class ServiceTest {
+import static util.Util.makeTempFile;
+import static util.Util.makeValidStudent;
+
+class ServiceBlackBoxTest {
     private Service service;
-
-    Student makeValidStudent() {
-        return new Student("uniqueId", "nume", 1, "mail@mail.mail");
-    }
-
-    String makeTempFile(String inputResource, String extension) throws IOException {
-        var tempFile = Files.createTempFile(java.util.UUID.randomUUID().toString(), extension);
-        Files.write(tempFile, ClassLoader.getSystemResource(inputResource).openStream().readAllBytes());
-        return tempFile.toString();
-    }
 
     @BeforeEach
     void setUp() throws IOException {
