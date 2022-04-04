@@ -1,6 +1,5 @@
 package service;
 
-import domain.Tema;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,7 +92,7 @@ public class ServiceWhiteBoxTest {
         var assignment = makeValidAssignment();
         assignment.setID("1");
         Assertions.assertEquals(
-                new Tema("1", "file repository", 2, 1),
+                assignment,
                 service.addTema(assignment)
         );
     }
