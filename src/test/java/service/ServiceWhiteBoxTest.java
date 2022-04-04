@@ -1,5 +1,6 @@
 package service;
 
+import domain.Tema;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,13 +47,6 @@ public class ServiceWhiteBoxTest {
     }
 
     @Test
-    void addTema_correctId_Success() {
-        var assignment = makeValidAssignment();
-        assignment.setID("uniqueId");
-        Assertions.assertNull(service.addTema(assignment));
-    }
-
-    @Test
     void addTema_emptyDescription_ValidationException() {
         var assignment = makeValidAssignment();
         assignment.setDescriere("");
@@ -64,13 +58,6 @@ public class ServiceWhiteBoxTest {
         var assignment = makeValidAssignment();
         assignment.setDescriere(null);
         Assertions.assertThrows(ValidationException.class, () -> service.addTema(assignment));
-    }
-
-    @Test
-    void addTema_nonEmptyDescription_Success() {
-        var assignment = makeValidAssignment();
-        assignment.setDescriere("desc");
-        Assertions.assertNull(service.addTema(assignment));
     }
 
     @Test
@@ -88,13 +75,6 @@ public class ServiceWhiteBoxTest {
     }
 
     @Test
-    void addTema_correctDeadline_Success() {
-        var assignment = makeValidAssignment();
-        assignment.setDeadline(10);
-        Assertions.assertNull(service.addTema(assignment));
-    }
-
-    @Test
     void addTema_primireLessThan1_ValidationException() {
         var assignment = makeValidAssignment();
         assignment.setPrimire(0);
@@ -109,7 +89,17 @@ public class ServiceWhiteBoxTest {
     }
 
     @Test
-    void addTema_correctPrimire_Success() {
+    void addTema_existingAssignment_ExistingAssignment() {
+        var assignment = makeValidAssignment();
+        assignment.setID("1");
+        Assertions.assertEquals(
+                new Tema("1", "file repository", 2, 1),
+                service.addTema(assignment)
+        );
+    }
+
+    @Test
+    void addTema_correctAssignment_Success() {
         var assignment = makeValidAssignment();
         assignment.setPrimire(10);
         Assertions.assertNull(service.addTema(assignment));
