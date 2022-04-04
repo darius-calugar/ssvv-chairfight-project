@@ -99,7 +99,7 @@ public class ServiceWhiteBoxTest {
     }
 
     @Test
-    void addTema_correctAssignment_Success() {
+    void addTema_correctAssignment_Null() {
         var assignment = makeValidAssignment();
         assignment.setPrimire(10);
         Assertions.assertNull(service.addTema(assignment));
