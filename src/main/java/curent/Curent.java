@@ -10,6 +10,12 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Curent {
 
+    private static String filename = "fisiere/DataInceput.txt";
+
+    public static void setFilename(String filename) {
+        Curent.filename = filename;
+    }
+
     /**
      * @return the current week from the starting of university
      */
@@ -25,7 +31,6 @@ public class Curent {
      * @return the date when university have started
      */
     public static LocalDate getStartDate() {
-        String filename = "fisiere/DataInceput.txt";
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             String line = bufferedReader.readLine();
             String[] words = line.split(",");

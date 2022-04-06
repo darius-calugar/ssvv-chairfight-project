@@ -1,10 +1,14 @@
 package util;
 
+import domain.Nota;
 import domain.Student;
 import domain.Tema;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
 
 public class Util {
     public static Student makeValidStudent() {
@@ -13,6 +17,10 @@ public class Util {
 
     public static Tema makeValidAssignment() {
         return new Tema("uniqueId", "desc", 1, 1);
+    }
+
+    public static Nota makeValidGrade() {
+        return new Nota("uniqueId", "uniqueId", "uniqueId", 10, LocalDate.of(2018,10,2));
     }
 
     public static String makeTempFile(String inputResource, String extension) throws IOException {
