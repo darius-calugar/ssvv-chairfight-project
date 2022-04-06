@@ -46,6 +46,8 @@ class ServiceIntegrationTest {
     @Test
     void addNota_correctGrade_GradeValue() {
         var grade = makeValidGrade();
+        grade.setIdStudent("1");
+        grade.setIdTema("1");
         Assertions.assertEquals(service.addNota(grade, "feedback"), grade.getNota());
     }
 
