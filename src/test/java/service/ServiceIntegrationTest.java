@@ -1,14 +1,15 @@
 package service;
 
 import curent.Curent;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import repository.NotaXMLRepo;
 import repository.StudentXMLRepo;
 import repository.TemaXMLRepo;
 import validation.NotaValidator;
 import validation.StudentValidator;
 import validation.TemaValidator;
-import validation.ValidationException;
 
 import java.io.IOException;
 
@@ -53,6 +54,27 @@ class ServiceIntegrationTest {
 
     @Test
     void bigBang_Success() {
+        var student = makeValidStudent();
+        Assertions.assertNull(service.addStudent(student));
+
+        var assignment = makeValidAssignment();
+        Assertions.assertNull(service.addTema(assignment));
+
+        var grade = makeValidGrade();
+        Assertions.assertEquals(service.addNota(grade, "feedback"), grade.getNota());
+    }
+
+    @Test
+    void topDownAddAssignment_Success() {
+        var student = makeValidStudent();
+        Assertions.assertNull(service.addStudent(student));
+
+        var assignment = makeValidAssignment();
+        Assertions.assertNull(service.addTema(assignment));
+    }
+
+    @Test
+    void topDownAddGrade_Success() {
         var student = makeValidStudent();
         Assertions.assertNull(service.addStudent(student));
 
